@@ -3,6 +3,7 @@ import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { Chart } from "../components/Chart";
 import { CreditCard } from "../components/CreditCard";
+import { Header } from '../components/Header';
 import { Slide } from "../components/swiper";
 import { Axios } from '../services/Axios';
 
@@ -21,13 +22,14 @@ export default function Home() {
     }
     fetchData();
   }, []);
+
   return (
     <div className="flex flex-col ml-4 sm:gap-16 md:gap-14">
 
       <div
         className="sm:hidden 
           md:flex p-4 mr-4 mt-4 bg-[#1E1E1E] rounded">
-        <h1 className="text-lg font-medium">Finance Management</h1>
+        <Header title='Finance Management' />
       </div>
 
       <div className="md:hidden">
@@ -78,7 +80,7 @@ export default function Home() {
         <Chart />
       </div>
 
-      <Button title="All spending" className="text-sm text-center font-medium py-2 mr-4 md:mb-4 bg-[#1E1E1E] rounded-md" />
+      <Button link='/budget' title="All spending" className="text-sm text-center font-medium py-2 mr-4 md:mb-4 bg-[#1E1E1E] rounded-md" />
     </div>
   )
 }
