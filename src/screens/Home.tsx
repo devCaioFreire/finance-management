@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Button } from "../components/Button";
-import { Card } from "../components/Card";
-import { Chart } from "../components/Chart";
-import { CreditCard } from "../components/CreditCard";
-import { Header } from '../components/Header';
-import { Slide } from "../components/swiper";
 import { Axios } from '../services/Axios';
+import { Button } from "./components/Button";
+import { Card } from "./components/Card";
+import { Chart } from "./components/Chart";
+import { CreditCard } from "./components/CreditCard";
+import { Header } from './components/Header';
+import { Slide } from "./components/swiper";
 
 export default function Home() {
   const [data, setData] = useState(null);

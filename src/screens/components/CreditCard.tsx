@@ -1,4 +1,4 @@
-import Flag from '../assets/flag-card.svg';
+import Flag from '../../assets/flag-card.svg';
 
 interface CreditCardProps {
   transactions: number;

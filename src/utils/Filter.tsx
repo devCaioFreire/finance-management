@@ -20,7 +20,7 @@ export const Filter: React.FC = () => {
             className="mt-1 w-6 h-6 text-zinc-100"
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="relative z-50 flex flex-col gap-3 h-full bg-[#1E1E1E] p-2 mr-2 shadow-lg text-sm rounded">
+        <DropdownMenuContent className="relative z-50 flex flex-col gap-3 bg-[#161616] p-2 mr-2 shadow-lg text-sm rounded">
           <DropdownMenuLabel className="flex items-center justify-center gap-2">
             <FaFilter className="w-3 h-3" />
             Filter
