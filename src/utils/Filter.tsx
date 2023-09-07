@@ -26,9 +26,9 @@ export const Filter: React.FC = () => {
             Filter
           </DropdownMenuLabel>
           <DropdownMenuSeparator className="border-[1px] rounded-full border-[#505050]"/>
-          <DropdownMenuItem>Total Earning</DropdownMenuItem>
-          <DropdownMenuItem>Invoices</DropdownMenuItem>
-          <DropdownMenuItem>Total Spending</DropdownMenuItem>
+          <DropdownMenuItem className="rounded transition-all p-1 hover:bg-[#2e2e2e]">Total Earning</DropdownMenuItem>
+          <DropdownMenuItem className="rounded transition-all p-1 hover:bg-[#2e2e2e]">Invoices</DropdownMenuItem>
+          <DropdownMenuItem className="rounded transition-all p-1 hover:bg-[#2e2e2e]">Total Spending</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>
