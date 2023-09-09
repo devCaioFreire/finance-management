@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import React, { ReactNode, useState } from "react";
+import { SelectCategory } from "./Select";
 
 interface FilterModalProps {
   isOpen?: boolean;
@@ -20,9 +21,11 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
 
-  async function handleSearchDescription(e: React.FormEvent<HTMLFormElement>) {
+  async function handleAdd(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    
     setDescription("");
+    setValue("");
     onClose?.();
   }
 
@@ -36,20 +39,11 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
           <DialogHeader>
             <DialogTitle>New Transaction</DialogTitle>
           </DialogHeader>
-          <form onSubmit={handleSearchDescription}>
+          <form onSubmit={handleAdd}>
             <div className="grid gap-4 py-4">
               <div className="flex flex-col mb-12 gap-6">
 
-                <div className="flex flex-col gap-3">
-                  <Label>Category</Label>
-                  <Input
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Category"
-                    className="outline-none border-[#505050]"
-                    autoComplete="off"
-                  />
-                </div>
+                <SelectCategory />
 
                 <div className="flex flex-col gap-3">
                   <Label>Description</Label>
@@ -65,8 +59,8 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
                 <div className="flex flex-col gap-3">
                   <Label>Value</Label>
                   <Input
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
                     placeholder="Value"
                     className="outline-none border-[#505050]"
                     autoComplete="off"
@@ -75,7 +69,10 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
 
               </div>
               <DialogFooter className="absolute right-6 bottom-5">
-                <button className="bg-slate-100 p-1 rounded-lg px-3 text-black" type="submit">Adicionar</button>
+                <button className="bg-slate-100 p-1 rounded-lg px-3 text-black"
+                  type="submit">
+                  Adicionar
+                </button>
               </DialogFooter>
             </div>
           </form>
