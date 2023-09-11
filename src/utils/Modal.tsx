@@ -7,6 +7,7 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Axios } from "@/services/Axios";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import React, { ReactNode, useState } from "react";
 import { SelectCategory } from "./Select";
@@ -20,13 +21,62 @@ interface FilterModalProps {
 export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children }) => {
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
+  const [category, setCategory] = useState<string>('');
+
+  const handleCategoryChange = (selectedCategory: string) => {
+    setCategory(selectedCategory);
+  }
+
+  async function getNumberOfTransactions() {
+    const api = 'https://sheet2api.com/v1/s0CsA8nqRyu6/pbp-finance-management/Transactions';
+    try {
+      const response = await Axios.get(api);
+      if (response.data && Array.isArray(response.data)) {
+        return response.data.length;
+      }
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+    }
+    return 0;
+  }
 
   async function handleAdd(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    
-    setDescription("");
-    setValue("");
-    onClose?.();
+    const api = 'https://sheet2api.com/v1/s0CsA8nqRyu6/pbp-finance-management/Transactions';
+
+    const currentTransactionsCount = await getNumberOfTransactions();
+    const newID = (currentTransactionsCount + 1).toString();
+
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+
+    const transactionData = {
+      id: newID,
+      description: description,
+      value: parseFloat(value),
+      category: category,
+      date: formattedDate
+    };
+
+    try {
+      const response = await Axios.post(api, transactionData);
+      if (response.status === 200 || response.status === 201) {
+        setDescription("");
+        setValue("");
+        onClose?.();
+      } else {
+        console.error("Erro ao adicionar a transação", response.data);
+      }
+    } catch (error) {
+      console.error("Falha ao adicionar a transação:", error);
+    }
   }
 
   return (
@@ -43,7 +93,7 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
             <div className="grid gap-4 py-4">
               <div className="flex flex-col mb-12 gap-6">
 
-                <SelectCategory />
+                <SelectCategory onCategoryChange={handleCategoryChange} />
 
                 <div className="flex flex-col gap-3">
                   <Label>Description</Label>
@@ -69,7 +119,8 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
 
               </div>
               <DialogFooter className="absolute right-6 bottom-5">
-                <button className="bg-slate-100 p-1 rounded-lg px-3 text-black"
+                <button
+                  className="bg-zinc-400 p-1 rounded-lg px-3 text-black transition-all hover:bg-zinc-200"
                   type="submit">
                   Adicionar
                 </button>

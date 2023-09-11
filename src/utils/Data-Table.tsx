@@ -32,7 +32,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="rounded-3xl overflow-auto border border-[#505050] mx-2 mb-4">
       <Table>
-        <TableHeader className="bg-[#131313]">
+        <TableHeader className=" bg-[#131313]">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -54,7 +54,7 @@ export function DataTable<TData, TValue>({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
-              className="border border-[#505050]"
+              className="border-[#505050]"
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >

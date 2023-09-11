@@ -1,7 +1,7 @@
+import { Axios } from '@/services/Axios';
 import { columns } from '@/utils/Columns';
 import { DataTable } from '@/utils/Data-Table';
-import { data } from '@/utils/data';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RiAddBoxFill } from 'react-icons/ri';
 import { Filter } from '../utils/Filter';
 import { Modal } from '../utils/Modal';
@@ -10,6 +10,26 @@ import { Header } from "./components/Header";
 
 export function BudgetTable() {
   const [showFilter, setShowFilter] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const apiURL = 'https://sheet2api.com/v1/s0CsA8nqRyu6/pbp-finance-management/Transactions';
+        const response = await Axios.get(apiURL);
+
+        if (response.status === 200) {
+          setData(response.data);
+        console.log(response.data)
+
+        }
+      } catch (error) {
+        console.error("Erro ao buscar os dados:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <>
