@@ -1,21 +1,32 @@
-import { ColumnDef } from "@tanstack/react-table"
-import { Transacitons } from "./data"
+import { ColumnDef } from "@tanstack/react-table";
+
+interface Transacitons {
+  id: string;
+  category: string;
+  description: string;
+  value: number;
+  date: string;
+}
 
 export const columns: ColumnDef<Transacitons>[] = [
   {
-    accessorKey: "id",
+    accessorKey: "ID",
     header: "ID",
   },
   {
-    accessorKey: "category",
+    accessorKey: "Category",
     header: "Category",
   },
   {
-    accessorKey: "first_name",
-    header: "First Name",
+    accessorKey: "Description",
+    header: "Description",
   },
   {
-    accessorKey: "last_name",
-    header: "Last Name",
+    accessorKey: "Value",
+    header: "Value",
+  },
+  {
+    accessorKey: "Date",
+    header: "Date",
   },
 ]

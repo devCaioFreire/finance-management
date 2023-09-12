@@ -29,10 +29,11 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   })
 
+  
   return (
     <div className="rounded-3xl overflow-auto border border-[#505050] mx-2 mb-4">
       <Table>
-        <TableHeader className=" bg-[#131313]">
+        <TableHeader className="bg-[#131313]">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -41,9 +42,9 @@ export function DataTable<TData, TValue>({
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                   </TableHead>
                 )
               })}
@@ -54,7 +55,7 @@ export function DataTable<TData, TValue>({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
-              className="border-[#505050]"
+                className="border-[#505050]"
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >
@@ -67,7 +68,7 @@ export function DataTable<TData, TValue>({
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
+              <TableCell colSpan={columns.length} className="h-full text-center">
                 No results.
               </TableCell>
             </TableRow>
