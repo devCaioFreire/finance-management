@@ -13,9 +13,21 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await Axios.get('/v1/s0CsA8nqRyu6/pbp-finance-management');
-        setData(response.data[0]);
-        console.log(response.data);
+        const spreadsheetId = '1L7DlUwnk8FJmAa3PlgXyh4OBecJtSNpxlMW5RFEtguk';
+        const range = 'Results!A:D';
+        const API_KEY = 'AIzaSyBV067z8N6cvECEjuAq546XtgPOf0TSW2Y'
+        const response = await Axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}
+        `);
+        const resultData = response.data.values;
+        if (resultData.length === 2) {
+          const titles = resultData[0];
+          const values = resultData[1];
+          const combinedData: any = {};
+          for (let i = 0; i < titles.length; i++) {
+            combinedData[titles[i]] = values[i];
+          }
+          setData(combinedData);
+        }
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
@@ -33,7 +45,7 @@ export default function Home() {
       </div>
 
       <div className="md:hidden">
-        <CreditCard transactions={12} balance={data && data['Balance']} />
+        <CreditCard transactions={data! && data['Total Transactions']} balance={data && data['Balance']} />
       </div>
 
       <div className="sm:hidden 
@@ -41,7 +53,7 @@ export default function Home() {
         xl:h-0 xl:pt-0 xl:bg-transparent xl:top-[11.8%]
         2xl:top-[10%]">
         <h1 className="text-2xl font-bold px-4 xl:hidden">My Acconut Bank</h1>
-        <CreditCard transactions={12} balance={data && data['Balance']} />
+        <CreditCard transactions={data! && data['Total Transactions']} balance={data && data['Balance']} />
       </div>
 
       <div className="flex flex-row w-full gap-4 md:hidden">
@@ -51,8 +63,8 @@ export default function Home() {
               <Card
                 key={index}
                 title={key}
-                value={`$ ${data[key]}`}
-                color={key === "Total Earning"}
+                value={`${data[key]}`}
+                color={key === "Total Transactions"}
               />
             ))
           }
@@ -68,8 +80,8 @@ export default function Home() {
             <Card
               key={index}
               title={key}
-              value={`$ ${data[key]}`}
-              color={key === "Total Earning"}
+              value={`${data[key]}`}
+              color={key === "Total Transactions"}
             />
           ))
         }

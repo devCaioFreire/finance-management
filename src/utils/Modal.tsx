@@ -28,7 +28,10 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
   }
 
   async function getNumberOfTransactions() {
-    const api = 'https://sheet2api.com/v1/s0CsA8nqRyu6/pbp-finance-management/Transactions';
+    const spreadsheetId = '1L7DlUwnk8FJmAa3PlgXyh4OBecJtSNpxlMW5RFEtguk';
+    const range = 'Transactions!A:E';
+    const API_KEY = 'AIzaSyBV067z8N6cvECEjuAq546XtgPOf0TSW2Y'
+    const api = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
     try {
       const response = await Axios.get(api);
       if (response.data && Array.isArray(response.data)) {
@@ -42,7 +45,10 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
 
   async function handleAdd(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const api = 'https://sheet2api.com/v1/s0CsA8nqRyu6/pbp-finance-management/Transactions';
+    const spreadsheetId = '1L7DlUwnk8FJmAa3PlgXyh4OBecJtSNpxlMW5RFEtguk';
+    const range = 'Transactions!A:E';
+    const API_KEY = 'AIzaSyBV067z8N6cvECEjuAq546XtgPOf0TSW2Y'
+    const api = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
 
     const currentTransactionsCount = await getNumberOfTransactions();
     const newID = (currentTransactionsCount + 1).toString();

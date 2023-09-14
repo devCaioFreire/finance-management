@@ -15,20 +15,37 @@ export function BudgetTable() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const apiURL = 'https://sheet2api.com/v1/s0CsA8nqRyu6/pbp-finance-management/Transactions';
+        const spreadsheetId = '1L7DlUwnk8FJmAa3PlgXyh4OBecJtSNpxlMW5RFEtguk';
+        const range = 'Transactions!A:E';
+        const API_KEY = 'AIzaSyBV067z8N6cvECEjuAq546XtgPOf0TSW2Y'
+        const apiURL = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
         const response = await Axios.get(apiURL);
 
-        if (response.status === 200) {
-          setData(response.data);
-          console.log(response.data)
+        const resultData = response.data.values;
+        console.log(resultData)
+        if (resultData.length > 1) {
+          const headers = resultData[0];
+          const values = resultData.slice(1);
+
+          const transformedData = values.map((valueRow: string[]) => {
+            let obj: Record<string, string> = {};
+            headers.forEach((header: string, index: number) => {
+              obj[header] = valueRow[index];
+            });
+            return obj;
+          });
+
+          setData(transformedData);
+          console.log(transformedData);
         }
+
       } catch (error) {
-        console.error("Erro ao buscar os dados:", error);
+        console.error("Erro ao buscar dados:", error);
       }
     }
 
     fetchData();
-  }, [data]);
+  }, []);
 
   return (
     <>
