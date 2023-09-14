@@ -41,7 +41,7 @@ export default function Home() {
       <div
         className="sm:hidden 
           md:flex p-4 mr-4 mt-4 bg-[#1E1E1E] rounded">
-        <Header title='Finance Management' />
+        <Header title='Personal Finance Software' />
       </div>
 
       <div className="md:hidden">
