@@ -14,6 +14,7 @@ interface SelectCategoryProps {
 export const SelectCategory: React.FC<SelectCategoryProps> = ({ onCategoryChange }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
+  selectedCategory;
   const handleSelect = (value: string) => {
     setSelectedCategory(value);
     onCategoryChange(value);

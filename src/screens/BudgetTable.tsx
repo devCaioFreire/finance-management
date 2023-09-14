@@ -12,6 +12,8 @@ export function BudgetTable() {
   const [showFilter, setShowFilter] = useState(false);
   const [data, setData] = useState([]);
 
+  showFilter;
+
   useEffect(() => {
     async function fetchData() {
       try {
