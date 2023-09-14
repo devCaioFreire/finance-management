@@ -7,7 +7,7 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Axios } from "@/services/Axios";
+import { Axios, GoogleSheetsAxios } from "@/services/Axios";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import React, { ReactNode, useState } from "react";
 import { SelectCategory } from "./Select";
@@ -48,7 +48,7 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
     const spreadsheetId = '1L7DlUwnk8FJmAa3PlgXyh4OBecJtSNpxlMW5RFEtguk';
     const range = 'Transactions!A:E';
     const API_KEY = 'AIzaSyBV067z8N6cvECEjuAq546XtgPOf0TSW2Y'
-    const api = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
+    const api = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?A:E=RAW`;
 
     const currentTransactionsCount = await getNumberOfTransactions();
     const newID = (currentTransactionsCount + 1).toString();
@@ -72,7 +72,7 @@ export const Modal: React.FC<FilterModalProps> = ({ isOpen, onClose, children })
     };
 
     try {
-      const response = await Axios.post(api, transactionData);
+      const response = await GoogleSheetsAxios.post(api, transactionData);
       if (response.status === 200 || response.status === 201) {
         setDescription("");
         setValue("");

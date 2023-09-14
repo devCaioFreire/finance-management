@@ -18,9 +18,9 @@ export const CreditCard = ({ transactions, balance }: CreditCardProps) => {
           <div className="text-white text-[10px] font-normal">Transaction</div>
           <div className="text-white text-xl font-bold">{transactions}</div>
         </div>
-        <div className="w-[78px] h-[43px] left-[152px] top-[120px] absolute flex-col justify-start items-start gap-1 inline-flex">
+        <div className="w-[110px] h-[43px] left-[145px] top-[120px] absolute flex-col justify-start items-start gap-1 inline-flex">
           <div className="text-white text-[10px] font-normal">Total Balance:</div>
-          <div className="text-white text-[0.85rem] text-base font-bold">{balance}</div>
+          <div className="text-white text-[0.8rem] text-base font-bold">{balance}</div>
         </div>
       </div>
     </div>
