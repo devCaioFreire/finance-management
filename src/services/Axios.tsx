@@ -7,7 +7,7 @@ export const Axios = axios.create({
   }
 });
 
-const accessToken = '757198465611-3plhmsl6dsqrha3oo9cc91o07s7mpme4.apps.googleusercontent.com';
+const accessToken = 'finance-management@finance-management-398901.iam.gserviceaccount.com';
 
 export const GoogleSheetsAxios = axios.create({
   baseURL: 'https://sheets.googleapis.com/v4/spreadsheets/',
